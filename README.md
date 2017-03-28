@@ -3,6 +3,7 @@ HoloLensアプリケーションにて、プリインアプリ「Holograms」の
 
 ## 導入
 * [HoloToolKit-Unity](https://github.com/Microsoft/HoloToolkit-Unity)をプロジェクトにインポートする
+* HologramsLikeController.unitypackageをプロジェクトにインポートする
 * HoloToolKit-UnityのInputManager.prefabとカーソル系のprefab(e.g. DefaultCursor.prefab)をシーンに追加する
 * Prefabs/TransformControllerManager.prefabをシーンに追加する
 * ワイヤーフレーム表示できるマテリアルをプロジェクトに追加する([参考サイト](http://qiita.com/amano-kiyoyuki/items/01c2be92010e1a08f4eb))
@@ -10,7 +11,7 @@ HoloLensアプリケーションにて、プリインアプリ「Holograms」の
 
 ## 使い方
 * 操作したい3Dモデルの配下にPrefabs/TransformController.prefabを追加する
-* 操作したい3DモデルにColliderがない場合は追加してください  
+* 操作したい3Dモデル(TransformController.prefabの親)にColliderがない場合は追加してください  
 
 ## 注意点
 * Scale(1,1,1)の場合に立方体におさまる3Dモデル(e.g. Cube, Sphere)は上記の手順で利用可能です
@@ -21,7 +22,7 @@ TransformControllerManagerのプロパティから、各種調整が可能です
 * Distance Scale  
 3Dモデルの位置を変更するとき、手を前後に動かしたときのオブジェクトの移動量にかかる係数
 * Base Position Cube Scale  
-ワイヤーフレーム形状のCubeのローカルスケール
+ワイヤーフレーム形状のCubeのローカルScale
 * Position Cube Material  
 3Dモデルを覆うCubeのマテリアル  
 * Rotation Speed  
@@ -31,7 +32,7 @@ TransformControllerManagerのプロパティから、各種調整が可能です
 * Scale Lower Limit  
 3Dモデルを縮小するときの、Scaleの下限値
 * Controller Scale  
-Cubeの頂点、辺上の3Dモデルのローカルスケール
+Cubeの頂点上、辺上の3DモデルのローカルScale
 * Complete Panel Position Y  
 操作完了パネルボタンの位置  
 0の場合はワイヤーフレームの天面に位置する
@@ -41,7 +42,7 @@ Cubeの頂点、辺上の3Dモデルのローカルスケール
 * READMEの英語化
 
 ## 参考
-* コードの解説は[ブログ記事]をご参照ください
+* コードの解説は[ブログ記事](http://blog.d-yama7.com/archives/481)をご参照ください
 * ご意見等ございましたらissueや[@dy_karous](https://twitter.com/dy_karous)までメンションいただけるとありがたいです
 
 ## ライセンス
