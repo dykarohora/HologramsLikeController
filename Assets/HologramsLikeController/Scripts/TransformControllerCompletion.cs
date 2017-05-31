@@ -19,7 +19,7 @@ namespace HologramsLikeController {
 
         private void Start() {
             TransformController tc = transform.GetComponentInParent<TransformController>();
-            float posY = TransformControlManager.Instance.basePositionCubeScale * tc.objScaleCorrectY / 2.0f;
+            float posY = TransformControlManager.Instance.positionCubeScale / 2.0f;
 
             transform.localPosition = new Vector3(0, posY + TransformControlManager.Instance.completePanelPositionY, 0);
         }

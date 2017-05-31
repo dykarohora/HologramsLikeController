@@ -42,25 +42,25 @@ namespace HologramsLikeController {
         }
 
         private void SetChildPositionAndScale(Transform child, RotationController.RotationAxis axis, int i) {
-            float basePos = TransformControlManager.Instance.basePositionCubeScale / 2.0f;
             TransformController tc = transform.GetComponentInParent<TransformController>();
+            var basePos = tc.PositionControlerScale * TransformControlManager.Instance.positionCubeScale /2.0f;
             switch (axis) {
                 case RotationController.RotationAxis.x:
                     child.localPosition = new Vector3(
                         0,
-                        basePos * tc.objScaleCorrectY * ((i & 2) != 0 ? -1 : 1),
-                        basePos * tc.objScaleCorrectZ * ((i & 1) != 0 ? -1 : 1));
+                        basePos.y * ((i & 2) != 0 ? -1 : 1),
+                        basePos.z * ((i & 1) != 0 ? -1 : 1));
                     break;
                 case RotationController.RotationAxis.y:
                     child.localPosition = new Vector3(
-                        basePos * tc.objScaleCorrectX * ((i & 2) != 0 ? -1 : 1),
+                        basePos.x * ((i & 2) != 0 ? -1 : 1),
                         0,
-                        basePos * tc.objScaleCorrectZ * ((i & 1) != 0 ? -1 : 1));
+                        basePos.z * ((i & 1) != 0 ? -1 : 1));
                     break;
                 case RotationController.RotationAxis.z:
                     child.localPosition = new Vector3(
-                        basePos * tc.objScaleCorrectX * ((i & 2) != 0 ? -1 : 1),
-                        basePos * tc.objScaleCorrectY * ((i & 1) != 0 ? -1 : 1),
+                        basePos.x * ((i & 2) != 0 ? -1 : 1),
+                        basePos.y * ((i & 1) != 0 ? -1 : 1),
                         0);
                     break;
                 default:
@@ -71,9 +71,9 @@ namespace HologramsLikeController {
             }
 
             // TODO:さまざまな大きさに対応できるようにする
-            float localScaleX = 0.1f / tc.target.transform.localScale.x;
-            float localScaleY = 0.1f / tc.target.transform.localScale.y;
-            float localScaleZ = 0.1f / tc.target.transform.localScale.z;
+            float localScaleX = 0.1f / tc.Target.transform.localScale.x;
+            float localScaleY = 0.1f / tc.Target.transform.localScale.y;
+            float localScaleZ = 0.1f / tc.Target.transform.localScale.z;
             child.localScale = new Vector3(localScaleX, localScaleY, localScaleZ) * TransformControlManager.Instance.controllerScale;
         }
     }

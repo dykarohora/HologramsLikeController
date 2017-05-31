@@ -23,7 +23,7 @@ namespace HologramsLikeController {
         private uint currentInputSourceId;
 
         private void OnEnable() {
-            target = transform.GetComponentInParent<TransformController>().target;
+            target = transform.GetComponentInParent<TransformController>().Target;
 
             if (target == null) {
 #if UNITY_EDITOR

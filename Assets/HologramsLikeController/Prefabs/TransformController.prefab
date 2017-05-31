@@ -1911,10 +1911,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ae4f7c939d85304097c4358f9745f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  objScaleCorrectX: 1
-  objScaleCorrectY: 1
-  objScaleCorrectZ: 1
 --- !u!114 &114146970073937470
 MonoBehaviour:
   m_ObjectHideFlags: 1

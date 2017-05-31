@@ -18,7 +18,7 @@ namespace HologramsLikeController {
         private float startDistance;
 
         private void OnEnable() {
-            target = transform.GetComponentInParent<TransformController>().target;
+            target = transform.GetComponentInParent<TransformController>().Target;
             if (target == null) {
 #if UNITY_EDITOR
                 Debug.LogError("PositionController-OnEnable: target is not set.");

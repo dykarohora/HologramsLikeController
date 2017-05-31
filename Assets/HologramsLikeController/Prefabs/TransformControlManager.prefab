@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceScale: 2
-  basePositionCubeScale: 1.2
+  positionCubeScale: 1.1
   positionCubeMaterial: {fileID: 2100000, guid: d600649e5e460d64d985c79654bd79b4,
     type: 2}
   rotationSpeed: 50

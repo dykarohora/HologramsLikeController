@@ -6,7 +6,7 @@ using UnityEngine;
 namespace HologramsLikeController {
     public class TransformControlManager : Singleton<TransformControlManager> {
         public float distanceScale = 2f;
-        public float basePositionCubeScale = 1.1f;
+        public float positionCubeScale = 1.1f;
         public Material positionCubeMaterial;
 
         public float rotationSpeed = 50.0f;
