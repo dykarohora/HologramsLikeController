@@ -23,9 +23,11 @@ namespace HologramsLikeController {
 
         private Vector3 startHandPosition;
         private Vector3 orthogonalRotationAxisVect;
+        private TransformController tc;
 
         private void OnEnable() {
-            target = transform.GetComponentInParent<TransformController>().Target;
+            tc = transform.GetComponentInParent<TransformController>();
+            target = tc.Target;
             if (target == null) {
 #if UNITY_EDITOR
                 Debug.LogError("PositionController-OnEnable: target is not set.");
@@ -84,10 +86,10 @@ namespace HologramsLikeController {
 
             float rotationVal = Vector3.Dot(projectMoveVect, orthogonalRotationAxisVect) * TransformControlManager.Instance.rotationSpeed;
 
-            target.transform.Rotate(
-                axis == RotationAxis.x ? rotationVal : 0,
-                axis == RotationAxis.y ? rotationVal : 0,
-                axis == RotationAxis.z ? rotationVal : 0
+            target.transform.RotateAround(
+                    tc.transform.position,
+                    axis == RotationAxis.x ? transform.right : axis == RotationAxis.y ? transform.up : transform.forward,
+                    rotationVal
                 );
         }
 

@@ -1,8 +1,5 @@
 ﻿using HoloToolkit.Unity.InputModule;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 namespace HologramsLikeController {
     public class TransformControllerCompletion : MonoBehaviour, IInputClickHandler {
@@ -19,7 +16,8 @@ namespace HologramsLikeController {
 
         private void Start() {
             TransformController tc = transform.GetComponentInParent<TransformController>();
-            float posY = TransformControlManager.Instance.positionCubeScale / 2.0f;
+
+            float posY = tc.PositionControlerScale.y;
 
             transform.localPosition = new Vector3(0, posY + TransformControlManager.Instance.completePanelPositionY, 0);
         }

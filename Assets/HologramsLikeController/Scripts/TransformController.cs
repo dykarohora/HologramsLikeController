@@ -6,12 +6,12 @@ public class TransformController : MonoBehaviour {
     public GameObject Target {
         get; private set;
     }
-
-    // TODO:回転方向の有効無効を制御できるようにする
    
     public Vector3 PositionControlerScale {
         get; private set;
     }
+
+    // TODO:インスペクタで回転方向の有効無効を制御できるようにする
 
     public void Awake() {
         Target = transform.parent.gameObject;
@@ -22,7 +22,6 @@ public class TransformController : MonoBehaviour {
         foreach(var rendererObj in Target.GetComponentsInChildren<Renderer>()) {
             boundsList.Add(rendererObj.bounds);
         }
-
 
         float maxX = boundsList.Max((bounds) => {
             return bounds.center.x + bounds.extents.x;
@@ -79,6 +78,13 @@ public class TransformController : MonoBehaviour {
         }
         */
 
+        float posX = maxX - (maxX - minX) / 2f;
+        float posY = maxY - (maxY - minY) / 2f;
+        float posZ = maxZ - (maxZ - minZ) / 2f;
+
+        Vector3 center = new Vector3(posX, posY, posZ);
+        transform.position = center;
+
         PositionControlerScale = new Vector3(
             (maxX - minX) / Target.transform.localScale.x,
             (maxY - minY) / Target.transform.localScale.y,
@@ -86,7 +92,9 @@ public class TransformController : MonoBehaviour {
         );
 
         if(Target.GetComponent<Collider>() == null) {
-            Target.AddComponent<BoxCollider>().size = PositionControlerScale;
+            var collider = Target.AddComponent<BoxCollider>();
+            collider.size = PositionControlerScale;
+            collider.center = Target.transform.InverseTransformPoint(center);
         }
     }
 }

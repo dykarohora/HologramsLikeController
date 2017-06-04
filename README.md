@@ -11,11 +11,12 @@ HoloLensアプリケーションにて、プリインアプリ「Holograms」の
 
 ## 使い方
 * 操作したい3Dモデルの配下にPrefabs/TransformController.prefabを追加する
-* 操作したい3Dモデル(TransformController.prefabの親)にColliderがない場合は追加してください  
+* ~~操作したい3Dモデル(TransformController.prefabの親)にColliderがない場合は追加してください  
 
 ## 注意点
-* Scale(1,1,1)の場合に立方体におさまる3Dモデル(e.g. Cube, Sphere)は上記の手順で利用可能です
-* おさまらない場合は、TransformControllerのインスペクタから、Obj Scale Correct X/Y/Zの値を変更して調整してください(testシーン参照)
+* ~~Scale(1,1,1)の場合に立方体におさまる3Dモデル(e.g. Cube, Sphere)は上記の手順で利用可能です~~
+* ~~おさまらない場合は、TransformControllerのインスペクタから、Obj Scale Correct X/Y/Zの値を変更して調整してください(testシーン参照)~~
+* 自動で調整されるよう修正しました。
 
 ## 調整用パラメータ
 TransformControllerManagerのプロパティから、各種調整が可能です

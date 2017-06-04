@@ -12,13 +12,19 @@ namespace HologramsLikeController {
         private uint currentInputSourceId;
 
         private Vector3 startHandPosition;
+        private Vector3 startTransformControllerPosition;
         private Vector3 startTargetPosition;
+        private Vector3 startDiffPivotToCenter;
+
         private Vector3 targetBaseScale;
         private Vector3 scaleAxisVect;
         private float startDistance;
 
+        private TransformController tc;
+
         private void OnEnable() {
-            target = transform.GetComponentInParent<TransformController>().Target;
+            tc = transform.GetComponentInParent<TransformController>();
+            target = tc.Target;
             if (target == null) {
 #if UNITY_EDITOR
                 Debug.LogError("PositionController-OnEnable: target is not set.");
@@ -32,6 +38,8 @@ namespace HologramsLikeController {
                 UpdatedDragging();
         }
 
+
+
         public void StartDragging() {
             if (!IsDraggingEnable)
                 return;
@@ -42,13 +50,16 @@ namespace HologramsLikeController {
             isDragging = true;
 
             currentInputSource.TryGetPosition(currentInputSourceId, out startHandPosition);
-            scaleAxisVect = transform.position - target.transform.position;
+
+            scaleAxisVect = transform.position - tc.transform.position;
             scaleAxisVect.Normalize();
 
             targetBaseScale = target.transform.localScale;
 
-            startDistance = Vector3.Distance(target.transform.position, transform.position);
+            startTransformControllerPosition = tc.transform.position;
+            startDistance = Vector3.Distance(startTransformControllerPosition, transform.position);
             startTargetPosition = target.transform.position;
+            startDiffPivotToCenter = startTargetPosition - startTransformControllerPosition;
         }
 
         public void UpdatedDragging() {
@@ -71,11 +82,11 @@ namespace HologramsLikeController {
                     TransformControlManager.Instance.scaleLowerLimit);
             }
 
-            float scaledDistance = Vector3.Distance(target.transform.position, transform.position);
-            float difference = scaledDistance - startDistance;
-            Vector3 correctionVect = scaleAxisVect * difference;
-
-            target.transform.position = startTargetPosition + correctionVect;
+            float scaledDistance = Vector3.Distance(tc.transform.position, transform.position);
+            float diffDistance = scaledDistance - startDistance;
+            Vector3 correctionVect = scaleAxisVect * diffDistance;
+            Vector3 correctionDiffPivotToCenter = target.transform.position - transform.GetComponentInParent<TransformController>().transform.position;
+            target.transform.position = startTargetPosition + correctionVect - (startDiffPivotToCenter - correctionDiffPivotToCenter);
         }
 
         public void StopDragging() {
